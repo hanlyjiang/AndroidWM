@@ -51,6 +51,11 @@ public class WatermarkText {
     private WatermarkPosition position = new WatermarkPosition(0, 0, 0);
 
     /**
+     * 对齐方式
+     */
+    private WatermarkAlign align = new WatermarkAlign();
+
+    /**
      * Constructors for WatermarkText
      */
     public WatermarkText(String text) {
@@ -210,4 +215,13 @@ public class WatermarkText {
         this.text = editText.getText().toString();
     }
 
+
+    public WatermarkAlign getAlign() {
+        return align;
+    }
+
+    public WatermarkText setAlign(WatermarkAlign align) {
+        this.align = align;
+        return this;
+    }
 }

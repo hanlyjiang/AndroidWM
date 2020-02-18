@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.watermark.androidwm.WatermarkDetector;
+import com.watermark.androidwm.bean.WatermarkAlign;
 import com.watermark.androidwm.task.DetectionReturnValue;
 import com.watermark.androidwm.listener.BuildFinishListener;
 import com.watermark.androidwm.WatermarkBuilder;
@@ -98,15 +99,17 @@ public class MainActivity extends AppCompatActivity {
         // The sample method of adding a text watermark.
         btnAddText.setOnClickListener((View v) -> {
             WatermarkText watermarkText = new WatermarkText(editText.getText().toString())
-                    .setPositionX(0.5)
-                    .setPositionY(0.5)
+                    .setPositionX(1)
+                    .setPositionY(1)
                     .setTextAlpha(255)
                     .setTextColor(Color.WHITE)
                     .setTextFont(R.font.champagne)
-                    .setTextShadow(0.1f, 5, 5, Color.BLUE);
+                    .setBackgroundColor(Color.CYAN)
+                    .setAlign(new WatermarkAlign(WatermarkAlign.Alignment.END, WatermarkAlign.Alignment.END))
+                    .setTextShadow(0.5f, 1, 1, Color.BLUE);
 
             WatermarkBuilder.create(this, backgroundView)
-                    .setTileMode(true)
+                    .setTileMode(false)
                     .loadWatermarkText(watermarkText)
                     .getWatermark()
                     .setToImageView(backgroundView);
