@@ -6,7 +6,7 @@ package com.watermark.androidwm.bean;
  * @author hanlyjiang on 2020-02-18-13:03.
  * @version 1.0
  */
-public class WatermarkAlign {
+public class WatermarkAlignAnchor {
 
     /**
      * 对齐方式
@@ -26,7 +26,7 @@ public class WatermarkAlign {
      */
     Alignment verticalAlign = Alignment.START;
 
-    public WatermarkAlign() {
+    public WatermarkAlignAnchor() {
     }
 
     /**
@@ -35,7 +35,7 @@ public class WatermarkAlign {
      * @param horizontalAlign
      * @param verticalAlign
      */
-    public WatermarkAlign(Alignment horizontalAlign, Alignment verticalAlign) {
+    public WatermarkAlignAnchor(Alignment horizontalAlign, Alignment verticalAlign) {
         this.horizontalAlign = horizontalAlign;
         this.verticalAlign = verticalAlign;
     }

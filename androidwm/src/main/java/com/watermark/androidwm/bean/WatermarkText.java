@@ -53,7 +53,7 @@ public class WatermarkText {
     /**
      * 对齐方式
      */
-    private WatermarkAlign align = new WatermarkAlign();
+    private WatermarkAlignAnchor alignAnchor = new WatermarkAlignAnchor();
 
     /**
      * Constructors for WatermarkText
@@ -216,12 +216,12 @@ public class WatermarkText {
     }
 
 
-    public WatermarkAlign getAlign() {
-        return align;
+    public WatermarkAlignAnchor getAlignAnchor() {
+        return alignAnchor;
     }
 
-    public WatermarkText setAlign(WatermarkAlign align) {
-        this.align = align;
+    public WatermarkText setAlignAnchor(WatermarkAlignAnchor alignAnchor) {
+        this.alignAnchor = alignAnchor;
         return this;
     }
 }

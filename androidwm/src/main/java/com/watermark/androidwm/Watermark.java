@@ -29,7 +29,7 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.watermark.androidwm.bean.AsyncTaskParams;
-import com.watermark.androidwm.bean.WatermarkAlign;
+import com.watermark.androidwm.bean.WatermarkAlignAnchor;
 import com.watermark.androidwm.bean.WatermarkImage;
 import com.watermark.androidwm.bean.WatermarkText;
 import com.watermark.androidwm.listener.BuildFinishListener;
@@ -207,7 +207,7 @@ public class Watermark {
                     Rect bitmapShaderRect = watermarkCanvas.getClipBounds();
                     watermarkCanvas.drawRect(bitmapShaderRect, watermarkPaint);
                 } else {
-                    float[] leftTop = getWaterTextPosition(watermarkText.getAlign(), scaledWMBitmap, backgroundImg);
+                    float[] leftTop = getWaterTextPosition(watermarkText.getAlignAnchor(), scaledWMBitmap, backgroundImg);
                     watermarkCanvas.drawBitmap(scaledWMBitmap,
                             leftTop[0],
                             leftTop[1],
@@ -228,18 +228,18 @@ public class Watermark {
      * @param backgroundImg
      * @return
      */
-    private float[] getWaterTextPosition(WatermarkAlign align, Bitmap scaledWMBitmap, Bitmap backgroundImg) {
+    private float[] getWaterTextPosition(WatermarkAlignAnchor align, Bitmap scaledWMBitmap, Bitmap backgroundImg) {
         int wmXShift, wmYShift;
-        if (align.getHorizontalAlign() == WatermarkAlign.Alignment.CENTER) {
+        if (align.getHorizontalAlign() == WatermarkAlignAnchor.Alignment.CENTER) {
             wmXShift = -scaledWMBitmap.getWidth() / 2;
-        } else if (align.getHorizontalAlign() == WatermarkAlign.Alignment.END) {
+        } else if (align.getHorizontalAlign() == WatermarkAlignAnchor.Alignment.END) {
             wmXShift = -scaledWMBitmap.getWidth();
         } else {
             wmXShift = 0;
         }
-        if (align.getVerticalAlign() == WatermarkAlign.Alignment.CENTER) {
+        if (align.getVerticalAlign() == WatermarkAlignAnchor.Alignment.CENTER) {
             wmYShift = -scaledWMBitmap.getHeight() / 2;
-        } else if (align.getVerticalAlign() == WatermarkAlign.Alignment.END) {
+        } else if (align.getVerticalAlign() == WatermarkAlignAnchor.Alignment.END) {
             wmYShift = -scaledWMBitmap.getHeight();
         } else {
             wmYShift = 0;
