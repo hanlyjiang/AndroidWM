@@ -30,7 +30,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    // test for local library.
+//     test for local library.
+//    implementation 'com.huangyz0918:androidwm:0.2.3'
+//    implementation 'com.huangyz0918:androidwm-light:0.1.2'
     implementation project(":androidwm")
     // glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
