@@ -2,6 +2,6 @@ jdk:
   - openjdk8
 install:
   - echo "Running a custom install command"
-  - ./gradlew clean -Pgroup=com.github.hanlyjiang -xtest -xlint install
+  - ./gradlew clean install -xtest
 env:
   PATH: "/opt/android-sdk-linux/cmake/3.10.2.4988404/bin"
