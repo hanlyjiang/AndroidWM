@@ -54,6 +54,7 @@ public class WatermarkText {
      * 对齐方式
      */
     private WatermarkAlignAnchor alignAnchor = new WatermarkAlignAnchor();
+    private Margin margins;
 
     /**
      * Constructors for WatermarkText
@@ -223,5 +224,28 @@ public class WatermarkText {
     public WatermarkText setAlignAnchor(WatermarkAlignAnchor alignAnchor) {
         this.alignAnchor = alignAnchor;
         return this;
+    }
+
+    public WatermarkText setMargin(Margin margins) {
+        this.margins = margins;
+        return this;
+    }
+
+    public Margin getMargin() {
+        return margins;
+    }
+
+    public static class Margin {
+        public int left;
+        public int top;
+        public int bottom;
+        public int right;
+
+        public Margin(int left, int top, int right, int bottom) {
+            this.left = left;
+            this.top = top;
+            this.right = right;
+            this.bottom = bottom;
+        }
     }
 }

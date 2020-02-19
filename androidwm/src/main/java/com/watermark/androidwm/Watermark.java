@@ -207,7 +207,7 @@ public class Watermark {
                     Rect bitmapShaderRect = watermarkCanvas.getClipBounds();
                     watermarkCanvas.drawRect(bitmapShaderRect, watermarkPaint);
                 } else {
-                    float[] leftTop = getWaterTextPosition(watermarkText.getAlignAnchor(), scaledWMBitmap, backgroundImg);
+                    float[] leftTop = getWaterTextPosition(watermarkText, scaledWMBitmap, backgroundImg);
                     watermarkCanvas.drawBitmap(scaledWMBitmap,
                             leftTop[0],
                             leftTop[1],
@@ -223,12 +223,14 @@ public class Watermark {
     /**
      * 计算文本绘制起点位置
      *
-     * @param align
+     * @param watermarkText
      * @param scaledWMBitmap
      * @param backgroundImg
      * @return
      */
-    private float[] getWaterTextPosition(WatermarkAlignAnchor align, Bitmap scaledWMBitmap, Bitmap backgroundImg) {
+    private float[] getWaterTextPosition(WatermarkText watermarkText, Bitmap scaledWMBitmap, Bitmap backgroundImg) {
+        final WatermarkAlignAnchor align = watermarkText.getAlignAnchor();
+        final WatermarkText.Margin margin = watermarkText.getMargin();
         int wmXShift, wmYShift;
         if (align.getHorizontalAlign() == WatermarkAlignAnchor.Alignment.CENTER) {
             wmXShift = -scaledWMBitmap.getWidth() / 2;
@@ -244,8 +246,10 @@ public class Watermark {
         } else {
             wmYShift = 0;
         }
-        float wmPX = (int) (backgroundImg.getWidth() * watermarkText.getPosition().getPositionX() + wmXShift);
-        float wmPY = (int) (backgroundImg.getHeight() * watermarkText.getPosition().getPositionY() + wmYShift);
+        float wmPX = (int) (backgroundImg.getWidth() * watermarkText.getPosition().getPositionX()
+                + wmXShift - margin.right + margin.left);
+        float wmPY = (int) (backgroundImg.getHeight() * watermarkText.getPosition().getPositionY()
+                + wmYShift - margin.bottom + margin.top);
         return new float[]{wmPX, wmPY};
     }
 
