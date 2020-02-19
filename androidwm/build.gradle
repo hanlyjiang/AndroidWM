@@ -2,6 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
+
+version = '0.2.3.2'
+install {
+    repositories.mavenInstaller {
+        pom.version = version
+//        pom.artifactId = 'androidwm'
+    }
+}
+
 android {
     compileSdkVersion 28
 
@@ -9,7 +18,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
