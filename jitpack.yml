@@ -1,0 +1,4 @@
+jdk:
+  - openjdk8
+env:
+  CMAKE_MAKE_PROGRAM: "/opt/android-sdk-linux/cmake/3.10.2.4988404/bin/ninja"
