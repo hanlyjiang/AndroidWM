@@ -99,13 +99,14 @@ public class MainActivity extends AppCompatActivity {
         // The sample method of adding a text watermark.
         btnAddText.setOnClickListener((View v) -> {
             WatermarkText watermarkText = new WatermarkText(editText.getText().toString())
-                    .setPositionX(0.98)
-                    .setPositionY(0.98)
+                    .setPositionX(0)
+                    .setPositionY(0)
                     .setTextAlpha(255)
+                    .setMargin(new WatermarkText.Margin(50, 50, 0, 0))
                     .setTextColor(Color.WHITE)
                     .setTextFont(R.font.champagne)
                     .setBackgroundColor(Color.CYAN)
-                    .setAlignAnchor(new WatermarkAlignAnchor(WatermarkAlignAnchor.Alignment.END, WatermarkAlignAnchor.Alignment.END))
+                    .setAlignAnchor(new WatermarkAlignAnchor(WatermarkAlignAnchor.Alignment.START, WatermarkAlignAnchor.Alignment.START))
                     .setTextShadow(0.5f, 1, 1, Color.BLUE);
 
             WatermarkBuilder.create(this, backgroundView)
