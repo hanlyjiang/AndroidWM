@@ -33,7 +33,9 @@ dependencies {
 //     test for local library.
 //    implementation 'com.huangyz0918:androidwm:0.2.3'
 //    implementation 'com.huangyz0918:androidwm-light:0.1.2'
-    implementation project(":androidwm")
+//    implementation project(":androidwm")
+    implementation 'com.github.hanlyjiang:androidwm:0.2.3.3'
+
     // glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
