@@ -33,6 +33,7 @@ import android.text.TextPaint;
 import android.util.Base64;
 import android.util.TypedValue;
 
+import com.watermark.androidwm.bean.DrawTextBean;
 import com.watermark.androidwm.bean.WatermarkImage;
 import com.watermark.androidwm.bean.WatermarkText;
 
@@ -57,7 +58,7 @@ public class BitmapUtils {
      *
      * @return {@link Bitmap} the bitmap return.
      */
-    public static Bitmap textAsBitmap(Context context, WatermarkText watermarkText) {
+    public static Bitmap textAsBitmap_old(Context context, WatermarkText watermarkText) {
         TextPaint watermarkPaint = new TextPaint();
         watermarkPaint.setColor(watermarkText.getTextColor());
         watermarkPaint.setStyle(watermarkText.getTextStyle());
@@ -115,6 +116,55 @@ public class BitmapUtils {
         staticLayout.draw(canvas);
         return image;
     }
+
+    public static Bitmap textAsBitmap(Context context, WatermarkText watermarkText) {
+        TextPaint watermarkPaint = new TextPaint();
+        watermarkPaint.setColor(watermarkText.getTextColor());
+        watermarkPaint.setStyle(watermarkText.getTextStyle());
+
+        if (watermarkText.getTextAlpha() >= 0 && watermarkText.getTextAlpha() <= 255) {
+            watermarkPaint.setAlpha(watermarkText.getTextAlpha());
+        }
+
+        float value = (float) watermarkText.getTextSize();
+        int pixel = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                value, context.getResources().getDisplayMetrics());
+        watermarkPaint.setTextSize(pixel);
+
+        if (watermarkText.getTextShadowBlurRadius() != 0
+                || watermarkText.getTextShadowXOffset() != 0
+                || watermarkText.getTextShadowYOffset() != 0) {
+            watermarkPaint.setShadowLayer(watermarkText.getTextShadowBlurRadius(),
+                    watermarkText.getTextShadowXOffset(),
+                    watermarkText.getTextShadowYOffset(),
+                    watermarkText.getTextShadowColor());
+        }
+
+        if (watermarkText.getTextFont() != 0) {
+            Typeface typeface = ResourcesCompat.getFont(context, watermarkText.getTextFont());
+            watermarkPaint.setTypeface(typeface);
+        }
+
+        watermarkPaint.setAntiAlias(true);
+        watermarkPaint.setTextAlign(Paint.Align.LEFT);
+        watermarkPaint.setStrokeWidth(5);
+
+        /**
+         * 解决支持\n换行问题
+         */
+        DrawTextBean drawTextBean = new DrawTextBean(watermarkText.getText(), watermarkPaint);
+        Bitmap image = Bitmap.createBitmap(drawTextBean.getMaxWidth(), drawTextBean.getMaxHight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(image);
+        canvas.drawColor(watermarkText.getBackgroundColor());
+        for (int i = 0; i < drawTextBean.getStrings().length; i++) {
+            Rect bounds = new Rect();
+            String dtext = drawTextBean.getStrings()[i];
+            watermarkPaint.getTextBounds(dtext, 0, dtext.length(), bounds);
+            canvas.drawText(drawTextBean.getStrings()[i], DrawTextBean.BASELINE_WIDTH / 2, (i + 1) * (drawTextBean.getLineHight() + DrawTextBean.BASELINE_HIAHT), watermarkPaint);
+        }
+        return image;
+    }
+
 
     /**
      * this method is for image resizing, we should get

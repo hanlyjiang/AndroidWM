@@ -46,5 +46,6 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
     // timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.google.code.gson:gson:2.8.0'
 
 }

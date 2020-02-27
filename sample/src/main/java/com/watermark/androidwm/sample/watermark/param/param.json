@@ -1,0 +1,29 @@
+{
+  "text": "地点：湖北省孝感市\n时间：2020-2-25",
+  "filePath": "/storage/emulated/0/$MuMu共享文件夹/t2.jpg",
+  "position": {
+    "horizontalAlignAnchor": "CENTER",
+    "verticalAlignAnchor": "CENTER",
+    "margin": {
+      "bottom": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0
+    },
+    "rotation": 5,
+    "x": 0.5,
+    "y": 0.5
+  },
+  "style": {
+    "shadow": {
+      "blurRadius": 0.1,
+      "shadowXOffset": 5,
+      "shadowYOffset": 5,
+      "shadowColor": "#000033"
+    },
+    "textAlpha": 255,
+    "textColor": "#AA0000",
+    "textSize": 16,
+    "backgroundColor": "#990000"
+  }
+}

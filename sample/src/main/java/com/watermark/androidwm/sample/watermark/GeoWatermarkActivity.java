@@ -14,41 +14,41 @@
  *   limitations under the License.
  *
  */
-package com.watermark.androidwm.sample;
+package com.watermark.androidwm.sample.watermark;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.watermark.androidwm.WatermarkBuilder;
 import com.watermark.androidwm.WatermarkDetector;
 import com.watermark.androidwm.bean.WatermarkAlignAnchor;
-import com.watermark.androidwm.task.DetectionReturnValue;
-import com.watermark.androidwm.listener.BuildFinishListener;
-import com.watermark.androidwm.WatermarkBuilder;
 import com.watermark.androidwm.bean.WatermarkImage;
 import com.watermark.androidwm.bean.WatermarkText;
+import com.watermark.androidwm.listener.BuildFinishListener;
 import com.watermark.androidwm.listener.DetectFinishListener;
+import com.watermark.androidwm.sample.R;
+import com.watermark.androidwm.task.DetectionReturnValue;
 
 import timber.log.Timber;
 //import com.watermark.androidwm.utils.GeoBitmapUtils;
 
 /**
- * This is the sample for library: androidwm.
- *
- * @author huangyz0918 (huangyz0918@gmail.com)
- * @since 29/08/2018
+ * @Author: wangsengren
+ * @Description:  水印视图
+ * @Date: 2020-02-21
+ * @Version: 1.0
  */
-public class MainActivity extends AppCompatActivity {
+public class GeoWatermarkActivity extends AppCompatActivity {
 
     private Button btnAddText;
     private Button btnAddImg;
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.geo_activity_watermark);
         initViews();
         initEvents();
     }
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Bitmap object) {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(MainActivity.this,
+                            Toast.makeText(GeoWatermarkActivity.this,
                                     "Successfully create invisible watermark!", Toast.LENGTH_SHORT).show();
                             if (object != null) {
                                 backgroundView.setImageBitmap(object);
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Bitmap object) {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(MainActivity.this,
+                            Toast.makeText(GeoWatermarkActivity.this,
                                     "Successfully create invisible watermark!", Toast.LENGTH_SHORT).show();
                             if (object != null) {
                                 backgroundView.setImageBitmap(object);
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onSuccess(DetectionReturnValue returnValue) {
                             progressBar.setVisibility(View.GONE);
                             if (returnValue != null) {
-                                Toast.makeText(MainActivity.this, "Successfully detected invisible text: "
+                                Toast.makeText(GeoWatermarkActivity.this, "Successfully detected invisible text: "
                                         + returnValue.getWatermarkString(), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DetectionReturnValue returnValue) {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(MainActivity.this,
+                            Toast.makeText(GeoWatermarkActivity.this,
                                     "Successfully detected invisible watermark!", Toast.LENGTH_SHORT).show();
                             if (returnValue != null) {
                                 watermarkView.setVisibility(View.VISIBLE);
