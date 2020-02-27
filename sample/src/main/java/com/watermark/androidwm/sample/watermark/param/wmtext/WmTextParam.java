@@ -1,7 +1,5 @@
 package com.watermark.androidwm.sample.watermark.param.wmtext;
 
-import android.graphics.Color;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.watermark.androidwm.sample.watermark.param.base.BaseWmParam;
@@ -12,7 +10,7 @@ import com.watermark.androidwm.sample.watermark.param.base.BaseWmParam;
  * @Date: 2020-02-21
  * @Version: 1.0
  */
-public class WMTextParam extends BaseWmParam {
+public class WmTextParam extends BaseWmParam {
     private String text;
     private WmTextStyle style;
 
@@ -34,7 +32,7 @@ public class WMTextParam extends BaseWmParam {
 
     @Override
     public String toString() {
-        return "WMTextParam{" +
+        return "WmTextParam{" +
                 "text='" + text + '\'' +
                 ", style=" + style +
                 ", filePath='" + filePath + '\'' +
@@ -42,7 +40,7 @@ public class WMTextParam extends BaseWmParam {
                 '}';
     }
 
-    public static String getWmTextParam(WMTextParam wmTextParam) {
+    public static String getWmTextParam(WmTextParam wmTextParam) {
         //建造者模式设置不同的配置
         Gson gson = new GsonBuilder()
                 //序列化为null对象
@@ -55,9 +53,9 @@ public class WMTextParam extends BaseWmParam {
         return s;
     }
 
-    public static WMTextParam getWmTextParamBean(String json) {
+    public static WmTextParam getWmTextParamBean(String json) {
         Gson gson = new Gson();
-        WMTextParam textParam = gson.fromJson(json, WMTextParam.class);
+        WmTextParam textParam = gson.fromJson(json, WmTextParam.class);
         return textParam;
     }
 

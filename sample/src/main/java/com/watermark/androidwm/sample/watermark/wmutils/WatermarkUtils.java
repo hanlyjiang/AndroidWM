@@ -4,14 +4,17 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
 import com.watermark.androidwm.WatermarkBuilder;
 import com.watermark.androidwm.bean.WatermarkAlignAnchor;
 import com.watermark.androidwm.bean.WatermarkText;
+import com.watermark.androidwm.sample.R;
 import com.watermark.androidwm.sample.watermark.param.base.PositionParam;
 import com.watermark.androidwm.sample.watermark.param.base.WMAlign;
-import com.watermark.androidwm.sample.watermark.param.wmtext.WMTextParam;
+import com.watermark.androidwm.sample.watermark.param.wmtext.WmTextParam;
 import com.watermark.androidwm.sample.watermark.param.wmtext.WmTextStyle;
 
 /**
@@ -25,12 +28,17 @@ public class WatermarkUtils {
     private final static String DEF_WM_TEXT_COLOR = "#000000";
 
     /**
-     * TextWatermar 样式设置
+     * 通过Json获取Watermar参数
      *
-     * @param wmTextParam
      * @return
      */
-    private static WatermarkText getTextWatermar(WMTextParam wmTextParam) {
+    protected static WatermarkText getTextWatermar(String json) {
+        Gson gson = new Gson();
+        WmTextParam wmTextParam = gson.fromJson(json, WmTextParam.class);
+        return getTextWatermar(wmTextParam);
+    }
+
+    protected static WatermarkText getTextWatermar(WmTextParam wmTextParam) {
         WatermarkText watermarkText = new WatermarkText(wmTextParam.getText());
         PositionParam wmTextParamPosition = wmTextParam.getPosition();
         if (wmTextParamPosition == null) {
@@ -55,16 +63,17 @@ public class WatermarkUtils {
         if (wmTextStyle == null) {
             wmTextStyle = new WmTextStyle();
         }
+        watermarkText.setTextStyle(Paint.Style.FILL);
         watermarkText.setTextSize(wmTextStyle.getTextSize());
         watermarkText.setTextAlpha(wmTextStyle.getTextAlpha())
-                .setTextColor(Color.parseColor(GeoEditTextUtils.getOptString(wmTextStyle.getTextColor(), DEF_WM_TEXT_COLOR)))
-                .setBackgroundColor(Color.parseColor(GeoEditTextUtils.getOptString(wmTextStyle.getBackgroundColor(), DEF_WM_BACKGROUNDCOLOR)));
+                .setTextColor(Color.parseColor(EditTextUtils.getOptString(wmTextStyle.getTextColor(), DEF_WM_TEXT_COLOR)))
+                .setBackgroundColor(Color.parseColor(EditTextUtils.getOptString(wmTextStyle.getBackgroundColor(), DEF_WM_BACKGROUNDCOLOR)));
         //设置字体阴影
         if (wmTextStyle.getShadow() != null) {
             watermarkText.setTextShadow(wmTextStyle.getShadow().getBlurRadius(),
                     wmTextStyle.getShadow().getShadowXOffset(),
                     wmTextStyle.getShadow().getShadowYOffset(),
-                    Color.parseColor(GeoEditTextUtils.getOptString(wmTextStyle.getShadow().getShadowColor(), "#00000000")));
+                    Color.parseColor(EditTextUtils.getOptString(wmTextStyle.getShadow().getShadowColor(), "#00000000")));
         }
         return watermarkText;
     }
@@ -76,7 +85,7 @@ public class WatermarkUtils {
      * @param wmTextParam
      * @return
      */
-    public static String saveWmTextBitmap(Context context, WMTextParam wmTextParam) {
+    public static String saveWmTextBitmap(Context context, WmTextParam wmTextParam) {
         WatermarkText watermarkText = getTextWatermar(wmTextParam);
         Bitmap bitmap = BitmapFactory.decodeFile(wmTextParam.getFilePath());
         Bitmap outputImage = builderTextWatermarkBitmap(context, bitmap, watermarkText);
@@ -85,15 +94,14 @@ public class WatermarkUtils {
 
     /**
      * 将水印设置到ImageView上，ImageView要提前设置宽高
+     *
      * @param context
      * @param wmTextParam
      * @param imageView
      */
-    public static void setWmBitmapToImageView(Context context, WMTextParam wmTextParam, ImageView imageView) {
+    public static void setWmBitmapToImageView(Context context, WmTextParam wmTextParam, ImageView imageView) {
         WatermarkText watermarkText = getTextWatermar(wmTextParam);
-        Bitmap bitmap = BitmapFactory.decodeFile(wmTextParam.getFilePath());
-        Bitmap outputImage = builderTextWatermarkBitmap(context, bitmap, watermarkText);
-        imageView.setImageBitmap(com.watermark.androidwm.utils.BitmapUtils.resizeBitmap(outputImage, imageView.getMeasuredWidth()));
+        builderTextWatermarkImageView(context, imageView, watermarkText);
     }
 
 
@@ -111,4 +119,17 @@ public class WatermarkUtils {
                 .getOutputImage();
     }
 
+    /**
+     * 给一个ImageView添加水印
+     * @param context
+     * @param imageView
+     * @param watermarkText
+     */
+    public static void builderTextWatermarkImageView(Context context, ImageView imageView, WatermarkText watermarkText) {
+        WatermarkBuilder.create(context, R.drawable.test2)
+                .setTileMode(false)
+                .loadWatermarkText(watermarkText)
+                .getWatermark()
+                .setToImageView(imageView);
+    }
 }

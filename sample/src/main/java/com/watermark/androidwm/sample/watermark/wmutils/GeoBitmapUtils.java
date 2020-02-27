@@ -3,8 +3,7 @@ package com.watermark.androidwm.sample.watermark.wmutils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.watermark.androidwm.bean.WatermarkText;
-import com.watermark.androidwm.sample.watermark.param.wmtext.WMTextParam;
+import com.watermark.androidwm.sample.watermark.param.wmtext.WmTextParam;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,7 +32,7 @@ public class GeoBitmapUtils {
      * @param bitmap
      * @param wmTextParam
      */
-    public static String saveWmBitmap(Bitmap bitmap, WMTextParam wmTextParam) {
+    public static String saveWmBitmap(Bitmap bitmap, WmTextParam wmTextParam) {
         File f = new File(getNewWmFile(wmTextParam.getFilePath(), wmTextParam.getQuality()));
         try {
             FileOutputStream out = new FileOutputStream(f);

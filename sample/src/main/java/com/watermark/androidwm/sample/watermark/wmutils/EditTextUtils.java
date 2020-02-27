@@ -11,7 +11,7 @@ import com.watermark.androidwm.sample.watermark.param.base.WMAlign;
  * @Date: 2020-02-21
  * @Version: 1.0
  */
-public class GeoEditTextUtils {
+public class EditTextUtils {
 
     /**
      * 获取一个float文本，如果为空或者格式失败返回默认值

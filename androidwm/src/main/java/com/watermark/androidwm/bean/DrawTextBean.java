@@ -18,6 +18,7 @@ public class DrawTextBean {
     public static int BASELINE_HIAHT = 10;
     //左右间距
     public static int BASELINE_WIDTH = 26;
+    public static final String WRAP_STRING = "<br/>";
     private int lineHight;
 
     public DrawTextBean(String drwaText, TextPaint textPaint) {
@@ -68,8 +69,8 @@ public class DrawTextBean {
         if (s == null || s.length() <= 0) {
             return new String[]{};
         }
-        if (s.contains("\n")) {
-            return s.split("\n");
+        if (s.contains(WRAP_STRING)) {
+            return s.split(WRAP_STRING);
         }
         return new String[]{s};
     }

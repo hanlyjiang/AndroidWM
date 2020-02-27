@@ -13,9 +13,9 @@ import com.watermark.androidwm.sample.R;
 import com.watermark.androidwm.sample.watermark.param.base.Margin;
 import com.watermark.androidwm.sample.watermark.param.base.PositionParam;
 import com.watermark.androidwm.sample.watermark.param.style.TextShadow;
-import com.watermark.androidwm.sample.watermark.param.wmtext.WMTextParam;
+import com.watermark.androidwm.sample.watermark.param.wmtext.WmTextParam;
 import com.watermark.androidwm.sample.watermark.param.wmtext.WmTextStyle;
-import com.watermark.androidwm.sample.watermark.wmutils.GeoEditTextUtils;
+import com.watermark.androidwm.sample.watermark.wmutils.EditTextUtils;
 import com.watermark.androidwm.sample.watermark.wmutils.WatermarkUtils;
 
 import java.util.HashMap;
@@ -79,14 +79,14 @@ public class GeoWatermarkSettingActivity extends AppCompatActivity {
                 /**
                  * 设置水印到图片
                  */
-                WatermarkUtils.setWmBitmapToImageView(GeoWatermarkSettingActivity.this, WMTextParam.getWmTextParamBean(tv_json.getText().toString()), iv_test);
+                WatermarkUtils.setWmBitmapToImageView(GeoWatermarkSettingActivity.this, WmTextParam.getWmTextParamBean(tv_json.getText().toString()), iv_test);
 
             }
         });
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WatermarkUtils.saveWmTextBitmap(GeoWatermarkSettingActivity.this, WMTextParam.getWmTextParamBean(tv_json.getText().toString()));
+                WatermarkUtils.saveWmTextBitmap(GeoWatermarkSettingActivity.this, WmTextParam.getWmTextParamBean(tv_json.getText().toString()));
             }
         });
     }
@@ -97,43 +97,43 @@ public class GeoWatermarkSettingActivity extends AppCompatActivity {
         }
     }
 
-    public WMTextParam getData() {
+    public WmTextParam getData() {
         StringBuilder data = new StringBuilder();
         for (Integer id : ids) {
             data.append(editTextMap.get(id).getText()).append(" , ");
         }
 
-        WMTextParam wmTextParam = new WMTextParam();
+        WmTextParam wmTextParam = new WmTextParam();
         //设置文本
         wmTextParam.setText(editTextMap.get(R.id.et_text).getText().toString());
 
         //设置位置样式
         PositionParam positionParam = new PositionParam();
-        positionParam.setX(GeoEditTextUtils.getOptFloat(editTextMap.get(R.id.et_x), 0));
-        positionParam.setY(GeoEditTextUtils.getOptFloat(editTextMap.get(R.id.et_y), 0));
+        positionParam.setX(EditTextUtils.getOptFloat(editTextMap.get(R.id.et_x), 0));
+        positionParam.setY(EditTextUtils.getOptFloat(editTextMap.get(R.id.et_y), 0));
         positionParam.setMargin(new Margin(
-                GeoEditTextUtils.getOptInt(editTextMap.get(R.id.et_left), 0),
-                GeoEditTextUtils.getOptInt(editTextMap.get(R.id.et_top), 0),
-                GeoEditTextUtils.getOptInt(editTextMap.get(R.id.et_right), 0),
-                GeoEditTextUtils.getOptInt(editTextMap.get(R.id.et_bottom), 0)));
-        positionParam.setHorizontalAlignAnchor(GeoEditTextUtils.getAlign(editTextMap.get(R.id.et_horizontalAlign)));
-        positionParam.setVerticalAlignAnchor(GeoEditTextUtils.getAlign(editTextMap.get(R.id.et_verticalAlign)));
-        positionParam.setRotation(GeoEditTextUtils.getOptInt(editTextMap.get(R.id.et_rotation), 0));
+                EditTextUtils.getOptInt(editTextMap.get(R.id.et_left), 0),
+                EditTextUtils.getOptInt(editTextMap.get(R.id.et_top), 0),
+                EditTextUtils.getOptInt(editTextMap.get(R.id.et_right), 0),
+                EditTextUtils.getOptInt(editTextMap.get(R.id.et_bottom), 0)));
+        positionParam.setHorizontalAlignAnchor(EditTextUtils.getAlign(editTextMap.get(R.id.et_horizontalAlign)));
+        positionParam.setVerticalAlignAnchor(EditTextUtils.getAlign(editTextMap.get(R.id.et_verticalAlign)));
+        positionParam.setRotation(EditTextUtils.getOptInt(editTextMap.get(R.id.et_rotation), 0));
         wmTextParam.setPosition(positionParam);
 
         //设置文字样式
         WmTextStyle wmTextStyle = new WmTextStyle();
-        wmTextStyle.setTextSize(GeoEditTextUtils.getOptInt(editTextMap.get(R.id.et_textSize), 14));
-        wmTextStyle.setTextAlpha(GeoEditTextUtils.getOptInt(editTextMap.get(R.id.et_textAlpha), 255));
-        wmTextStyle.setTextColor(GeoEditTextUtils.getOptString(editTextMap.get(R.id.et_textColor), "#000000"));
-        wmTextStyle.setBackgroundColor(GeoEditTextUtils.getOptString(editTextMap.get(R.id.et_backgroundColor), "#00000000"));
+        wmTextStyle.setTextSize(EditTextUtils.getOptInt(editTextMap.get(R.id.et_textSize), 14));
+        wmTextStyle.setTextAlpha(EditTextUtils.getOptInt(editTextMap.get(R.id.et_textAlpha), 255));
+        wmTextStyle.setTextColor(EditTextUtils.getOptString(editTextMap.get(R.id.et_textColor), "#000000"));
+        wmTextStyle.setBackgroundColor(EditTextUtils.getOptString(editTextMap.get(R.id.et_backgroundColor), "#00000000"));
         wmTextStyle.setShadow(new TextShadow(
-                GeoEditTextUtils.getOptFloat(editTextMap.get(R.id.et_blurRadius), 0),
-                GeoEditTextUtils.getOptInt(editTextMap.get(R.id.et_shadowXOffset), 0),
-                GeoEditTextUtils.getOptInt(editTextMap.get(R.id.et_shadowYOffset), 0),
-                GeoEditTextUtils.getOptString(editTextMap.get(R.id.et_shadowColor), "#00000000")));
+                EditTextUtils.getOptFloat(editTextMap.get(R.id.et_blurRadius), 0),
+                EditTextUtils.getOptInt(editTextMap.get(R.id.et_shadowXOffset), 0),
+                EditTextUtils.getOptInt(editTextMap.get(R.id.et_shadowYOffset), 0),
+                EditTextUtils.getOptString(editTextMap.get(R.id.et_shadowColor), "#00000000")));
         wmTextParam.setStyle(wmTextStyle);
-        Log.i("wsr", WMTextParam.getWmTextParam(wmTextParam));
+        Log.i("wsr", WmTextParam.getWmTextParam(wmTextParam));
         Toast.makeText(this, wmTextParam.toString(), Toast.LENGTH_LONG).show();
         return wmTextParam;
     }
