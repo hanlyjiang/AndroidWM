@@ -1,76 +1,108 @@
 package com.watermark.androidwm.bean;
 
-import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.text.TextPaint;
 
 import java.util.Arrays;
 
+/**
+ * 文本水印相关参数实体，包括文本内容
+ *
+ * @author 王僧仁
+ */
 public class DrawTextBean {
+
+    private static final String LINE_SEPARATE = "<br/>";
+
     private TextPaint textPaint;
-    private String drwaText;
+    private String drawText;
+    private String[] separatedLineStrs;
+
     private int maxWidth;
-    //最大高度
-    private int maxHight;
-    private String[] strings;
+    /**
+     * 最大高度
+     */
+    private int maxHeight;
+    private int lineHeight;
 
-    //每行最高
-    public static int BASELINE_HIAHT = 10;
-    //左右间距
-    public static int BASELINE_WIDTH = 26;
-    public static final String WRAP_STRING = "<br/>";
-    private int lineHight;
+    /**
+     * 行间距，默认为 lineHeight 的1/4
+     */
+    private int lineSpace;
+    /**
+     * 字间距
+     */
+    private int wordSpace = 26;
 
-    public DrawTextBean(String drwaText, TextPaint textPaint) {
-        this.drwaText = drwaText;
+    public DrawTextBean(String drawText, TextPaint textPaint) {
+        this.drawText = drawText;
         this.textPaint = textPaint;
-        this.strings = stringToArray(drwaText);
+        this.separatedLineStrs = separateToMultiLine(drawText);
         Rect bounds = new Rect();
-        textPaint.getTextBounds(drwaText, 0, drwaText.length(), bounds);
-        this.maxWidth = getMaxLength(strings, textPaint) + 20;
-        this.lineHight = bounds.height();
-        BASELINE_HIAHT = lineHight / 4;
-        this.maxHight = lineHight * strings.length + (strings.length + 2) * BASELINE_HIAHT;
+        textPaint.getTextBounds(drawText, 0, drawText.length(), bounds);
+        this.lineHeight = bounds.height();
+        calculate(separatedLineStrs);
+    }
+
+    private void calculate(String[] separatedLineStrs) {
+        maxWidth = getMaxLength(separatedLineStrs, textPaint) + 20;
+        lineSpace = lineHeight / 4;
+        maxHeight = lineHeight * this.separatedLineStrs.length + (this.separatedLineStrs.length + 2) * getLineSpace();
+    }
+
+    public int getLineSpace() {
+        return lineSpace;
+    }
+
+    /**
+     * 设置行间距
+     *
+     * @param lineSpace 行间距 px
+     */
+    public void setLineSpace(int lineSpace) {
+        this.lineSpace = lineSpace;
+    }
+
+    public int getWordSpace() {
+        return wordSpace;
+    }
+
+    /**
+     * 设置字间距 默认为26px
+     *
+     * @param wordSpace 字间距的值 px
+     */
+    public void setWordSpace(int wordSpace) {
+        this.wordSpace = wordSpace;
     }
 
     public int getMaxWidth() {
         return maxWidth;
     }
 
-    public void setMaxWidth(int maxWidth) {
-        this.maxWidth = maxWidth;
+    public int getMaxHeight() {
+        return maxHeight;
     }
 
-    public int getMaxHight() {
-        return maxHight;
+    public String[] getSeparatedLineStrs() {
+        return separatedLineStrs;
     }
 
-    public void setMaxHight(int maxHight) {
-        this.maxHight = maxHight;
+    /**
+     * 获取的文本行高，不包含行间距
+     *
+     * @return 文本行高
+     */
+    public int getLineHeight() {
+        return lineHeight;
     }
 
-    public String[] getStrings() {
-        return strings;
-    }
-
-    public void setStrings(String[] strings) {
-        this.strings = strings;
-    }
-
-    public int getLineHight() {
-        return lineHight;
-    }
-
-    public void setLineHight(int lineHight) {
-        this.lineHight = lineHight;
-    }
-
-    private static String[] stringToArray(String s) {
+    private static String[] separateToMultiLine(String s) {
         if (s == null || s.length() <= 0) {
             return new String[]{};
         }
-        if (s.contains(WRAP_STRING)) {
-            return s.split(WRAP_STRING);
+        if (s.contains(LINE_SEPARATE)) {
+            return s.split(LINE_SEPARATE);
         }
         return new String[]{s};
     }
@@ -90,11 +122,11 @@ public class DrawTextBean {
     public String toString() {
         return "DrawTextBean{" +
                 "textPaint=" + textPaint +
-                ", drwaText='" + drwaText + '\'' +
+                ", drawText='" + drawText + '\'' +
                 ", maxWidth=" + maxWidth +
-                ", maxHight=" + maxHight +
-                ", strings=" + Arrays.toString(strings) +
-                ", lineHight=" + lineHight +
+                ", maxHeight=" + maxHeight +
+                ", separatedLineStrs=" + Arrays.toString(separatedLineStrs) +
+                ", lineHeight=" + lineHeight +
                 '}';
     }
 }

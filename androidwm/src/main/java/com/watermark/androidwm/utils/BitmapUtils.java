@@ -58,7 +58,7 @@ public class BitmapUtils {
      *
      * @return {@link Bitmap} the bitmap return.
      */
-    public static Bitmap textAsBitmap_old(Context context, WatermarkText watermarkText) {
+    private static Bitmap textAsBitmap_old(Context context, WatermarkText watermarkText) {
         TextPaint watermarkPaint = new TextPaint();
         watermarkPaint.setColor(watermarkText.getTextColor());
         watermarkPaint.setStyle(watermarkText.getTextStyle());
@@ -149,18 +149,16 @@ public class BitmapUtils {
         watermarkPaint.setTextAlign(Paint.Align.LEFT);
         watermarkPaint.setStrokeWidth(5);
 
-        /**
-         * 解决支持\n换行问题
-         */
+        // 解决支持\n换行问题
         DrawTextBean drawTextBean = new DrawTextBean(watermarkText.getText(), watermarkPaint);
-        Bitmap image = Bitmap.createBitmap(drawTextBean.getMaxWidth(), drawTextBean.getMaxHight(), Bitmap.Config.ARGB_8888);
+        Bitmap image = Bitmap.createBitmap(drawTextBean.getMaxWidth(), drawTextBean.getMaxHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(image);
         canvas.drawColor(watermarkText.getBackgroundColor());
-        for (int i = 0; i < drawTextBean.getStrings().length; i++) {
+        for (int i = 0; i < drawTextBean.getSeparatedLineStrs().length; i++) {
             Rect bounds = new Rect();
-            String dtext = drawTextBean.getStrings()[i];
+            String dtext = drawTextBean.getSeparatedLineStrs()[i];
             watermarkPaint.getTextBounds(dtext, 0, dtext.length(), bounds);
-            canvas.drawText(drawTextBean.getStrings()[i], DrawTextBean.BASELINE_WIDTH / 2, (i + 1) * (drawTextBean.getLineHight() + DrawTextBean.BASELINE_HIAHT), watermarkPaint);
+            canvas.drawText(drawTextBean.getSeparatedLineStrs()[i], drawTextBean.getWordSpace() / 2, (i + 1) * (drawTextBean.getLineHeight() + drawTextBean.getLineSpace()), watermarkPaint);
         }
         return image;
     }
@@ -285,7 +283,6 @@ public class BitmapUtils {
             bitmapArray[4 * i + 2] = Color.green(inputPixels[i]);
             bitmapArray[4 * i + 3] = Color.blue(inputPixels[i]);
         }
-
         return bitmapArray;
     }
 }
