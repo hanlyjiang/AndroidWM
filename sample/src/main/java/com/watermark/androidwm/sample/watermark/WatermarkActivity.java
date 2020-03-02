@@ -40,7 +40,7 @@ import com.watermark.androidwm.sample.R;
 import com.watermark.androidwm.task.DetectionReturnValue;
 
 import timber.log.Timber;
-//import com.watermark.androidwm.utils.GeoBitmapUtils;
+//import com.watermark.androidwm.utils.NewBitmapUtils;
 
 /**
  * @Author: wangsengren
@@ -48,7 +48,7 @@ import timber.log.Timber;
  * @Date: 2020-02-21
  * @Version: 1.0
  */
-public class GeoWatermarkActivity extends AppCompatActivity {
+public class WatermarkActivity extends AppCompatActivity {
 
     private Button btnAddText;
     private Button btnAddImg;
@@ -147,12 +147,12 @@ public class GeoWatermarkActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Bitmap object) {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(GeoWatermarkActivity.this,
+                            Toast.makeText(WatermarkActivity.this,
                                     "Successfully create invisible watermark!", Toast.LENGTH_SHORT).show();
                             if (object != null) {
                                 backgroundView.setImageBitmap(object);
                                 // Save to local needs permission.
-//                                GeoBitmapUtils.saveAsPNG(object, "sdcard/DCIM/", true);
+//                                NewBitmapUtils.saveAsPNG(object, "sdcard/DCIM/", true);
                             }
                         }
 
@@ -175,7 +175,7 @@ public class GeoWatermarkActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Bitmap object) {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(GeoWatermarkActivity.this,
+                            Toast.makeText(WatermarkActivity.this,
                                     "Successfully create invisible watermark!", Toast.LENGTH_SHORT).show();
                             if (object != null) {
                                 backgroundView.setImageBitmap(object);
@@ -199,7 +199,7 @@ public class GeoWatermarkActivity extends AppCompatActivity {
                         public void onSuccess(DetectionReturnValue returnValue) {
                             progressBar.setVisibility(View.GONE);
                             if (returnValue != null) {
-                                Toast.makeText(GeoWatermarkActivity.this, "Successfully detected invisible text: "
+                                Toast.makeText(WatermarkActivity.this, "Successfully detected invisible text: "
                                         + returnValue.getWatermarkString(), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -220,7 +220,7 @@ public class GeoWatermarkActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DetectionReturnValue returnValue) {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(GeoWatermarkActivity.this,
+                            Toast.makeText(WatermarkActivity.this,
                                     "Successfully detected invisible watermark!", Toast.LENGTH_SHORT).show();
                             if (returnValue != null) {
                                 watermarkView.setVisibility(View.VISIBLE);

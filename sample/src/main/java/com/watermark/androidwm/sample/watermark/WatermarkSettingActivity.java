@@ -28,7 +28,7 @@ import java.util.Map;
  * @Date: 2020-02-21
  * @Version: 1.0
  */
-public class GeoWatermarkSettingActivity extends AppCompatActivity {
+public class WatermarkSettingActivity extends AppCompatActivity {
 
     private Button getDataBtn, clearBtn, buildBtn,btn_save;
 
@@ -61,7 +61,7 @@ public class GeoWatermarkSettingActivity extends AppCompatActivity {
         getDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WatermarkUtils.setWmBitmapToImageView(GeoWatermarkSettingActivity.this, getData(), iv_test);
+                WatermarkUtils.setWmBitmapToImageView(WatermarkSettingActivity.this, getData(), iv_test);
             }
         });
 
@@ -79,14 +79,14 @@ public class GeoWatermarkSettingActivity extends AppCompatActivity {
                 /**
                  * 设置水印到图片
                  */
-                WatermarkUtils.setWmBitmapToImageView(GeoWatermarkSettingActivity.this, WmTextParam.getWmTextParamBean(tv_json.getText().toString()), iv_test);
+                WatermarkUtils.setWmBitmapToImageView(WatermarkSettingActivity.this, WmTextParam.getWmTextParamBean(tv_json.getText().toString()), iv_test);
 
             }
         });
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WatermarkUtils.saveWmTextBitmap(GeoWatermarkSettingActivity.this, WmTextParam.getWmTextParamBean(tv_json.getText().toString()));
+                WatermarkUtils.saveWmTextBitmap(WatermarkSettingActivity.this, WmTextParam.getWmTextParamBean(tv_json.getText().toString()));
             }
         });
     }

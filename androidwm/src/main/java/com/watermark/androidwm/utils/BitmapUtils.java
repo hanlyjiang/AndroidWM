@@ -27,15 +27,19 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.TypedValue;
 
 import com.watermark.androidwm.bean.DrawTextBean;
 import com.watermark.androidwm.bean.WatermarkImage;
 import com.watermark.androidwm.bean.WatermarkText;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -117,7 +121,16 @@ public class BitmapUtils {
         return image;
     }
 
-    public static Bitmap textAsBitmap(Context context, WatermarkText watermarkText) {
+    /**
+     * @param context
+     * @param watermarkText
+     * @return
+     */
+    @Nullable
+    public static Bitmap textAsBitmap(Context context, @NonNull WatermarkText watermarkText) {
+        if (TextUtils.isEmpty(watermarkText.getText())) {
+            return null;
+        }
         TextPaint watermarkPaint = new TextPaint();
         watermarkPaint.setColor(watermarkText.getTextColor());
         watermarkPaint.setStyle(watermarkText.getTextStyle());

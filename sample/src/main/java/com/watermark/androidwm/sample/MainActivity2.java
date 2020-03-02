@@ -39,7 +39,7 @@ import com.watermark.androidwm.listener.DetectFinishListener;
 import com.watermark.androidwm.task.DetectionReturnValue;
 
 import timber.log.Timber;
-//import com.watermark.androidwm.utils.GeoBitmapUtils;
+//import com.watermark.androidwm.utils.NewBitmapUtils;
 
 /**
  * This is the sample for library: androidwm.
@@ -151,7 +151,7 @@ public class MainActivity2 extends AppCompatActivity {
                             if (object != null) {
                                 backgroundView.setImageBitmap(object);
                                 // Save to local needs permission.
-//                                GeoBitmapUtils.saveAsPNG(object, "sdcard/DCIM/", true);
+//                                NewBitmapUtils.saveAsPNG(object, "sdcard/DCIM/", true);
                             }
                         }
 

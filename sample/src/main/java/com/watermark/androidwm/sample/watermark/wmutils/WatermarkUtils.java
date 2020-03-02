@@ -89,7 +89,7 @@ public class WatermarkUtils {
         WatermarkText watermarkText = getTextWatermar(wmTextParam);
         Bitmap bitmap = BitmapFactory.decodeFile(wmTextParam.getFilePath());
         Bitmap outputImage = builderTextWatermarkBitmap(context, bitmap, watermarkText);
-        return GeoBitmapUtils.saveWmBitmap(outputImage, wmTextParam);
+        return NewBitmapUtils.saveWmBitmap(outputImage, wmTextParam);
     }
 
     /**

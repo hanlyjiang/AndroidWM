@@ -16,7 +16,7 @@ import java.io.IOException;
  * @Date: 2020-02-21
  * @Version: 1.0
  */
-public class GeoBitmapUtils {
+public class NewBitmapUtils {
 
     public static Bitmap loadBitmap(String picturePath) throws FileNotFoundException {
         Bitmap bitmap = BitmapFactory.decodeFile(picturePath);

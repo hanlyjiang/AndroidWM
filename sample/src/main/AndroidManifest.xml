@@ -14,14 +14,14 @@
         android:largeHeap="true"
         android:hardwareAccelerated="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".watermark.GeoWatermarkSettingActivity">
+        <activity android:name=".watermark.WatermarkSettingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".watermark.GeoWatermarkActivity"/>
+        <activity android:name=".watermark.WatermarkActivity"/>
     </application>
 
 </manifest>
